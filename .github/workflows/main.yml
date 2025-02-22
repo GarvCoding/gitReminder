@@ -1,19 +1,13 @@
-name: Call Firebase Function Every 1 Minute
+name: Call Firebase Function Every Minute
 
 on:
   schedule:
-    - cron: "*/1 * * * *"  # Runs every 10 minutes
+    - cron: "*/1 * * * *"  # Runs every minute
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  call-firebase-function:
+  call-function:
     runs-on: ubuntu-latest
-
     steps:
       - name: Call Firebase Function
-        run: |
-          curl -X POST "${{ secrets.SERVERLESS_FUNCTION_URL }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "message": "GitHub Action Triggered",
-              "timestamp": "'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'"
-            }'
+        run: curl -X POST https://us-central1-delforms.cloudfunctions.net/testEventLogger
