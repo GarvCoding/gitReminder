@@ -1,8 +1,8 @@
-name: Call Firebase Function Every 10 Minutes
+name: Call Firebase Function Every 1 Minute
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # Runs every 10 minutes
+    - cron: "*/1 * * * *"  # Runs every 10 minutes
 
 jobs:
   call-firebase-function:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Call Firebase Function
         run: |
-          curl -X POST "${{ secrets.FIREBASE_FUNCTION_URL }}" \
+          curl -X POST "${{ secrets.SERVERLESS_FUNCTION_URL }}" \
             -H "Content-Type: application/json" \
             -d '{
               "message": "GitHub Action Triggered",
